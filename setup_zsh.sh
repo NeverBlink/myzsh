@@ -20,12 +20,12 @@ else
             exit 1
         fi
     fi
+fi
 
-    # Set zsh as the default shell
-    if [ -n "$SHELL" ] && [ "$SHELL" != "$(which zsh)" ]; then
-        echo "Changing the default shell to Zsh..."
-        chsh -s "$(which zsh)"
-    fi
+# Set zsh as the default shell
+if [ -n "$SHELL" ] && [ "$SHELL" != "$(which zsh)" ]; then
+    echo "Changing the default shell to Zsh..."
+    chsh -s "$(which zsh)"
 fi
 
 echo "Zsh is installed and set as the default shell."
