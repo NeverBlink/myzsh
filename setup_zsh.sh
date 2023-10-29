@@ -1,23 +1,31 @@
 #!/bin/bash
 
-# Check if zsh is installed
-if ! command -v zsh &>/dev/null; then
-    # If not installed, try to install it based on the package manager available
-    if command -v apt &>/dev/null; then
-        echo "Zsh is not installed. Installing Zsh using apt..."
-        sudo apt update
-        sudo apt install -y zsh
-    else
-        echo "Zsh is not installed, and no known package manager found to install it."
-        echo "Please install Zsh manually."
-        exit 1
-    fi
-fi
+if groups | grep -q '\bsudo\b'; then
+    echo "User is a member of the sudo group."
+else
+    echo "User is not a member of the sudo group. Requesting sudo password..."
+    # Request the sudo password
+    sudo echo "Running script with sudo privileges..."
 
-# Set zsh as the default shell
-if [ -n "$SHELL" ] && [ "$SHELL" != "$(which zsh)" ]; then
-    echo "Changing the default shell to Zsh..."
-    chsh -s "$(which zsh)"
+    # Check if zsh is installed
+    if ! command -v zsh &>/dev/null; then
+        # If not installed, try to install it based on the package manager available
+        if command -v apt &>/dev/null; then
+            echo "Zsh is not installed. Installing Zsh using apt..."
+            sudo apt update
+            sudo apt install -y zsh
+        else
+            echo "Zsh is not installed, and no known package manager found to install it."
+            echo "Please install Zsh manually."
+            exit 1
+        fi
+    fi
+
+    # Set zsh as the default shell
+    if [ -n "$SHELL" ] && [ "$SHELL" != "$(which zsh)" ]; then
+        echo "Changing the default shell to Zsh..."
+        chsh -s "$(which zsh)"
+    fi
 fi
 
 echo "Zsh is installed and set as the default shell."
