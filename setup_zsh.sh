@@ -1,25 +1,21 @@
 #!/bin/bash
 
-if groups | grep -q '\bsudo\b'; then
-    echo "User is a member of the sudo group."
-else
-    echo "User is not a member of the sudo group. Requesting sudo password..."
-    # Request the sudo password
-    sudo echo "Running script with sudo privileges..."
-
-    # Check if zsh is installed
-    if ! command -v zsh &>/dev/null; then
-        # If not installed, try to install it based on the package manager available
-        if command -v apt &>/dev/null; then
-            echo "Zsh is not installed. Installing Zsh using apt..."
-            sudo apt update
-            sudo apt install -y zsh
-        else
-            echo "Zsh is not installed, and no known package manager found to install it."
-            echo "Please install Zsh manually."
-            exit 1
-        fi
+install_zsh () {
+    if command -v apt &>/dev/null; then
+        echo "Zsh is not installed. Installing Zsh using apt..."
+        sudo echo "Running zsh install with sudo privileges..."
+        sudo apt update
+        sudo apt install -y zsh
+    else
+        echo "Zsh is not installed, and no known package manager found to install it."
+        echo "Please install Zsh manually."
+        exit 1
     fi
+}
+
+# Check if zsh is installed
+if ! command -v zsh &>/dev/null; then
+    install_zsh
 fi
 
 # Set zsh as the default shell
