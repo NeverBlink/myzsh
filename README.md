@@ -1,0 +1,2 @@
+# myzsh
+personalized zsh setup
