@@ -6,6 +6,11 @@ install_zsh () {
         sudo echo "Running zsh install with sudo privileges..."
         sudo apt update
         sudo apt install -y zsh
+        # Set zsh as the default shell
+        if [ -n "$SHELL" ] && [ "$SHELL" != "$(which zsh)" ]; then
+            echo "Changing the default shell to Zsh..."
+            chsh -s "$(which zsh)"
+        fi
     else
         echo "Zsh is not installed, and no known package manager found to install it."
         echo "Please install Zsh manually."
@@ -16,12 +21,6 @@ install_zsh () {
 # Check if zsh is installed
 if ! command -v zsh &>/dev/null; then
     install_zsh
-fi
-
-# Set zsh as the default shell
-if [ -n "$SHELL" ] && [ "$SHELL" != "$(which zsh)" ]; then
-    echo "Changing the default shell to Zsh..."
-    chsh -s "$(which zsh)"
 fi
 
 echo "Zsh is installed and set as the default shell."
