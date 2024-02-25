@@ -12,6 +12,18 @@ install_sudo () {
     fi
 }
 
+install_curl () {
+    if command -v apt &>/dev/null; then
+        echo "curl is not installed. Installing curl using apt..."
+        apt update
+        apt install -y curl
+    else
+        echo "curl is not installed, and no known package manager found to install it."
+        echo "Please install curl manually."
+        exit 1
+    fi
+}
+
 install_zsh () {
     if command -v apt &>/dev/null; then
         echo "Zsh is not installed. Installing Zsh using apt..."
@@ -47,17 +59,31 @@ install_git () {
 if ! command -v sudo &>/dev/null; then
     install_sudo
     echo "sudo was installed"
+else
+    echo "sudo is already installed"
+fi
+
+# Check if sudo is installed
+if ! command -v curl &>/dev/null; then
+    install_curl
+    echo "curl was installed"
+else
+    echo "curl is already installed"
 fi
 
 # Check if zsh is installed
 if ! command -v zsh &>/dev/null; then
     install_zsh
     echo "zsh was installed and set as the default shell."
+else
+    echo "zsh is already installed"
 fi
 
 # Check if git is installed
 if ! command -v git &>/dev/null; then
     install_git
+else
+    echo "git is already installed"
 fi
 
 echo "Installing oh-my-zsh..."

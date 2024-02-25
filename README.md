@@ -2,17 +2,20 @@
 Personalized zsh setup with suggestions, auto-complete and powerlevel10k
 
 # Prerequesites
-- apt 
-- curl
+- apt
+- git
 
 # Installation
-curl -fsSL https://raw.githubusercontent.com/NeverBlink/myzsh/main/setup_zsh.sh | sh
+1. git clone https://github.com/NeverBlink/myzsh
+2. cd myzsh
+3. chmod +x setup_zsh.sh
+4. ./setup_zsh.sh
 
 # Screenshot
 ![Alt text](/screenshots/screenshot_1.png?raw=true "Optional Title")
 
 # Used Tools / Repos
-CaskaydiaCove Nerd Font
+CaskaydiaCove Nerd Font [CaskaydiaCove NF Mono]
 
 https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/CascadiaCode
 
