@@ -101,6 +101,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 # copy settings from git-repo
+echo "copying configurations..."
 cp .p10k.zsh ~/.p10k.zsh
 cp .zshrc ~/.zshrc
 
