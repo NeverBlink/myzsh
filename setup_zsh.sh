@@ -18,19 +18,6 @@ install_zsh () {
     fi
 }
 
-install_curl () {
-    if command -v apt &>/dev/null; then
-        echo "curl is not installed. Installing curl using apt..."
-        sudo echo "Running curl install with sudo privileges..."
-        sudo apt update
-        sudo apt install -y curl
-    else
-        echo "curl is not installed, and no known package manager found to install it."
-        echo "Please install curl manually."
-        exit 1
-    fi
-}
-
 install_git () {
     if command -v apt &>/dev/null; then
         echo "git is not installed. Installing git using apt..."
@@ -48,11 +35,6 @@ install_git () {
 if ! command -v zsh &>/dev/null; then
     install_zsh
     echo "Zsh is installed and set as the default shell."
-fi
-
-# Check if curl is installed
-if ! command -v curl &>/dev/null; then
-    install_curl
 fi
 
 # Check if git is installed
