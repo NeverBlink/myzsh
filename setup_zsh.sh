@@ -1,5 +1,17 @@
 #!/bin/bash
 
+install_sudo () {
+    if command -v apt &>/dev/null; then
+        echo "sudo is not installed. Installing sudo using apt..."
+        apt update
+        apt install -y sudo
+    else
+        echo "sudo is not installed, and no known package manager found to install it."
+        echo "Please install sudo manually."
+        exit 1
+    fi
+}
+
 install_zsh () {
     if command -v apt &>/dev/null; then
         echo "Zsh is not installed. Installing Zsh using apt..."
@@ -31,10 +43,16 @@ install_git () {
     fi
 }
 
+# Check if sudo is installed
+if ! command -v sudo &>/dev/null; then
+    install_sudo
+    echo "sudo was installed"
+fi
+
 # Check if zsh is installed
 if ! command -v zsh &>/dev/null; then
     install_zsh
-    echo "Zsh is installed and set as the default shell."
+    echo "zsh was installed and set as the default shell."
 fi
 
 # Check if git is installed

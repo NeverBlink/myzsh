@@ -2,6 +2,7 @@
 Personalized zsh setup with suggestions, auto-complete and powerlevel10k
 
 # Prerequesites
+- apt 
 - curl
 
 # Installation
